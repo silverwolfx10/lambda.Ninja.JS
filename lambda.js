@@ -11,22 +11,21 @@
  *        $lambda('(a, b) => a + b');
  * 
  */
-Ninja.module('$lambda', [
+this.Ninja.module('$lambda', [
 
   '$apply',
   '$concat',
   '$format',
   '$match',
-  '$split',
-  '$_'
+  '$split'
 
-], function ($apply, $concat, $format, $match, $split, $_) {
+], function ($apply, $concat, $format, $match, $split, _) {
   
   /**
    * Expressao que separa os parametros e o corpo
    * da funcao
    */
-  var arrow = $match($_, /^\((.*)\)\s*=>\s*(.*)$/);
+  var arrow = $match(_, /^\((.*)\)\s*=>\s*(.*)$/);
   
   /**
    * Uma expressão de função de seta (também conhecida como Arrow Function) tem uma sintaxe mais
@@ -43,7 +42,7 @@ Ninja.module('$lambda', [
    */
   function lambda(a) {
     return $apply(Function, $concat($split(arrow(a)[1], ','), [$format('return {0}', [arrow(a)[2]])]));
-  };
+  }
   
   /**
    * Revelacao do servico $lambda, encapsulando a visibilidade das funcoes
